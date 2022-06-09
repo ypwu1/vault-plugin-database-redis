@@ -20,8 +20,8 @@ URL: PUT http://127.0.0.1:8200/v1/database/config/my-redis
 Code: 400. Errors:
 
 * error creating database object: invalid database version: 2 errors occurred:
-        * fork/exec /config/plugin/redis-database-plugin: no such file or directory
-        * fork/exec /config/plugin/redis-database-plugin: no such file or directory
+        * fork/exec /config/plugin/vault-plugin-database-redis: no such file or directory
+        * fork/exec /config/plugin/vault-plugin-database-redis: no such file or directory
 ````
 
 ## Installation
@@ -44,12 +44,12 @@ Code: 400. Errors:
 Sample commands for registering and starting to use the plugin:
 
 ```bash
-$ SHA256=$(shasum -a 256 plugins/redis-database-plugin | cut -d' ' -f1)
+$ SHA256=$(shasum -a 256 plugins/vault-plugin-database-redis | cut -d' ' -f1)
 
 $ vault secrets enable database
 
-$ vault write sys/plugins/catalog/database/redis-database-plugin sha256=$SHA256 \
-        command=redis-database-plugin
+$ vault write sys/plugins/catalog/database/vault-plugin-database-redis sha256=$SHA256 \
+        command=vault-plugin-database-redis
 ```
 
 At this stage you are now ready to initialize the plugin to connect to the redis db using unencrypted or encrypted communications.

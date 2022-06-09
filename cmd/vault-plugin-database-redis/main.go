@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	hclog "github.com/hashicorp/go-hclog"
 	redis "github.com/fhitchen/vault-plugin-database-redis"
+	hclog "github.com/hashicorp/go-hclog"
 	dbplugin "github.com/hashicorp/vault/sdk/database/dbplugin/v5"
 )
 

@@ -2,16 +2,14 @@ package redis
 
 import (
 	"context"
-//	"crypto/x509"
-//	"encoding/base64"
 	"fmt"
 	"strings"
 	"sync"
 	"time"
 
-	"github.com/mediocregopher/radix/v3"
 	"github.com/hashicorp/errwrap"
 	"github.com/hashicorp/vault/sdk/database/helper/connutil"
+	"github.com/mediocregopher/radix/v3"
 	"github.com/mitchellh/mapstructure"
 )
 
@@ -78,7 +76,7 @@ func (c *redisDBConnectionProducer) Init(ctx context.Context, initConfig map[str
 	}
 
 	c.Addr = fmt.Sprintf("%s:%d", c.Host, c.Port)
-	
+
 	if c.TLS {
 		if len(c.Base64Pem) == 0 {
 			return nil, fmt.Errorf("base64pem cannot be empty")
@@ -125,7 +123,7 @@ func (c *redisDBConnectionProducer) Connection(ctx context.Context) (interface{}
 
 	customConnFunc := func(network, addr string) (radix.Conn, error) {
 		return radix.Dial(network, addr,
-			radix.DialTimeout(1 * time.Minute),
+			radix.DialTimeout(1*time.Minute),
 			radix.DialAuthUser(c.Username, c.Password),
 		)
 	}

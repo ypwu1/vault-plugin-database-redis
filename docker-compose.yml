@@ -1,0 +1,27 @@
+version: "3"
+
+networks:
+  vault:
+
+services:
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - vault
+
+  vault:
+    image: vault
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - "8200:8200"
+    environment:
+      VAULT_LOCAL_CONFIG: '{"plugin_directory":"/etc/vault/plugins"}'
+      VAULT_DEV_ROOT_TOKEN_ID: root
+      VAULT_LOG_LEVEL: debug
+    volumes:
+      - "./bin:/etc/vault/plugins"
+    networks:
+      - vault
